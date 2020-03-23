@@ -2,6 +2,7 @@
 # coding=utf-8
 
 import sys
+import json
 from urllib import parse
 
 from requests import Session
@@ -46,5 +47,5 @@ def get_urls(url):
 if __name__ == '__main__':
     lesson_key = sys.argv[1]
     urls = get_lesson_urls(lesson_key)
-    for url in urls:
+    for url in urls.values():
         print(url)
