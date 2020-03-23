@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css')}}">
+
+    <title>仅供内部使用！</title>
+  </head>
+  <body>
+    <div class="container">
+      <h2>临时写的，出错了等会再试，只能列出开启了录课和网页回放的视频。</h2>
+    </div>
+
+    <div class="container">
+        <form id="form" action="/lessonUrls" method="post">
+            <div class="form-group">
+              <label for="key">请输入回放的链接！</label>
+              <input id="key" name="key" class="form-control">
+            </div>
+            <button type="button" class="btn btn-primary" >点击获取视频链接</button>
+          </form>
+    </div>
+    <div class="container">
+        <p id="url"></p>
+    </div>
+
+    <div class="container">
+      <h2>获取地址后可以复制地址到浏览器然后下载，或者复制到地址到迅雷下载。</h2>
+    </div>
+    <script src="{{ url_for('static', filename='js/jquery.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
+    <script>
+        $(document).ready(function() {
+            $('button').click(function() {
+              $.getJSON({
+                url: '/lessonUrls',
+                data: $('form').serialize(),
+                type: 'POST',
+                success: function(data) {
+                  $.each(data, function(i, field) {
+                    $('#url').append(field + " " );
+                  })
+                }
+              })
+            })
+    })      
+    </script>
+  </body>
+</html>
